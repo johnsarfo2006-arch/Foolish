@@ -15,7 +15,6 @@ const files = [
   { url: PYODIDE_BASE + 'pyodide.js', dest: 'pyodide/pyodide.js' },
   { url: PYODIDE_BASE + 'pyodide.asm.js', dest: 'pyodide/pyodide.asm.js' },
   { url: PYODIDE_BASE + 'pyodide.asm.wasm', dest: 'pyodide/pyodide.asm.wasm' },
-  { url: PYODIDE_BASE + 'pyodide.asm.data', dest: 'pyodide/pyodide.asm.data' },
   { url: PYODIDE_BASE + 'python_stdlib.zip', dest: 'pyodide/python_stdlib.zip' },
   { url: PYODIDE_BASE + 'pyodide-lock.json', dest: 'pyodide/pyodide-lock.json' },
   { url: ACE_BASE + 'ace.js', dest: 'ace/ace.js' },

@@ -17,7 +17,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '24'
+          node-version: '22'
 
       - name: Setup Java
         uses: actions/setup-java@v4
@@ -39,6 +39,16 @@ jobs:
           npx cap add android
           npx cap sync android
 
+      - name: Copy custom app icon
+        run: |
+          for SIZE in mdpi hdpi xhdpi xxhdpi xxxhdpi; do
+            if [ -f "resources/mipmap-${SIZE}/ic_launcher.png" ]; then
+              cp resources/mipmap-${SIZE}/ic_launcher.png android/app/src/main/res/mipmap-${SIZE}/ic_launcher.png
+              cp resources/mipmap-${SIZE}/ic_launcher.png android/app/src/main/res/mipmap-${SIZE}/ic_launcher_round.png
+              echo "✅ Copied ${SIZE} icon"
+            fi
+          done
+
       - name: Make gradlew executable
         run: chmod +x android/gradlew
 
@@ -51,6 +61,8 @@ jobs:
         run: |
           mkdir -p output
           cp android/app/build/outputs/apk/debug/app-debug.apk output/ByteForge-Academy.apk
+          echo "APK size:"
+          ls -lh output/ByteForge-Academy.apk
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
@@ -58,3 +70,7 @@ jobs:
           name: ByteForge-Academy-APK
           path: output/ByteForge-Academy.apk
           retention-days: 30
+
+      - name: Done!
+        run: echo "✅ ByteForge Academy APK built successfully!"
+        
